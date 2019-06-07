@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>easyui--关于源码相关 | Gridea</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://shine53.github.io/favicon.ico?v=1559916357060">
+<link rel="stylesheet" href="https://shine53.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://shine53.github.io">
+        <img class="avatar" src="https://shine53.github.io/images/avatar.png?v=1559916357060" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://shine53.github.io">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">easyui--关于源码相关</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-06-07</span>
+            
+          </div>
+          <div class="post-content">
+            <h1 id="easyui-的-html-标签大都是-js-生成的">easyui 的 html 标签大都是 js 生成的</h1>
+<p>所以在 easyui 中用 html 标签生成和用 js 生成的区别不大。</p>
+<h1 id="文件相关">文件相关</h1>
+<p>在整个 easyui 文件中，plugins 文件和 src 中的文件是相对应的，在对应的组件用到的时候才会进行请求相应的文件。</p>
+<pre><code class="language-js">// jquery.parser.js
+
+$.parser={ auto:true, emptyFn:function(){}, onComplete:function(_b){}, plugins:[&quot;draggable&quot;,&quot;droppable&quot;,&quot;resizable&quot;,&quot;pagination&quot;,&quot;tooltip&quot;,&quot;linkbutton&quot;,&quot;menu&quot;,&quot;sidemenu&quot;,&quot;menubutton&quot;,&quot;splitbutton&quot;,&quot;switchbutton&quot;,&quot;progressbar&quot;,&quot;radiobutton&quot;,&quot;checkbox&quot;,&quot;tree&quot;,&quot;textbox&quot;,&quot;passwordbox&quot;,&quot;maskedbox&quot;,&quot;filebox&quot;,&quot;combo&quot;,&quot;combobox&quot;,&quot;combotree&quot;,&quot;combogrid&quot;,&quot;combotreegrid&quot;,&quot;tagbox&quot;,&quot;numberbox&quot;,&quot;validatebox&quot;,&quot;searchbox&quot;,&quot;spinner&quot;,&quot;numberspinner&quot;,&quot;timespinner&quot;,&quot;datetimespinner&quot;,&quot;calendar&quot;,&quot;datebox&quot;,&quot;datetimebox&quot;,&quot;slider&quot;,&quot;layout&quot;,&quot;panel&quot;,&quot;datagrid&quot;,&quot;propertygrid&quot;,&quot;treegrid&quot;,&quot;datalist&quot;,&quot;tabs&quot;,&quot;accordion&quot;,&quot;window&quot;,&quot;dialog&quot;,&quot;form&quot;], parse:function(_c){
+	var aa=[];
+	for(var i=0;i&lt;$.parser.plugins.length;i++){
+		var _d=$.parser.plugins[i];
+		var r=$(&quot;.easyui-&quot;+_d,_c);
+		if(r.length){
+			if(r[_d]){
+				r.each(function(){
+						$(this)[_d]($.data(this,&quot;options&quot;)||{});
+				});
+			}else{
+					aa.push({name:_d,jq:r});
+			}
+			..........
+			
+	if(!window.easyloader&amp;&amp;$.parser.auto){
+			$.parser.parse();   // 对结构进行渲染
+			// 如果不想让数据自动渲染 $parser.parse.auto = false; 即可
+			// 动态生成数据时，需要手动 $.parser.parse(dom), 渲染的是该节点的后代，不包括该节点
+	}
+</code></pre>
+<h1 id="js-生成">js 生成</h1>
+<pre><code class="language-js">	$.fn.layout.defaults={ fit:false,onExpand:function(_72){}, onCollapse:function(_73){}, onAdd:function(_74){}, onRemove:function(_75){}};
+</code></pre>
+<p>如果要修改一些默认值，例如 panel，需要这样来修改</p>
+<pre><code class="language-js">// 这是 panel 的 href 请求页面时的加载动画显示的消息（注：href 只加载 body 中的数据）
+	$.fn.panel.defaults.loadingMessage = &quot;正在加载中...&quot;
+</code></pre>
+<h1 id="html-生成">html 生成</h1>
+<p>主要是利用 class 来调用样式，用 data-options 来生成效果。</p>
+<pre><code class="language-html">	&lt;div class=&quot;easyui-panel&quot; fit=&quot;true&quot; data-options=&quot;width:600,height:300,title:'panel',iconCls:'icon-ok'&quot;&gt;我是一个panel&lt;/div&gt;
+</code></pre>
+<p>iconCls: 图标（ 设置一个 16* 16 图标 ）
+fit=&quot;true&quot; : 填充整个父容器（宽高失效）
+...
+具体有哪些属性，查看文档</p>
+<p>*关于 data-options 的两个个注意点：
+1. data-options 中设置属性和直接在标签中设置属性（如上面的 fit）效果是一样的，<font color=#0099ff size=5>但是</font>，如果有 json 和事件的，只能写在 data 中。
+2. data-options 也可以写在 js 中
+<code>js 				$('#tt').tabs({ data: { 								title: &quot;...&quot;, 								iconCls: &quot;...&quot; 						}, onSelect: function() { showContent(); } })</code></p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://shine53.github.io/post/chang-jian-de-jie-kou-di-zhi">
+              <h3 class="post-title">
+                下一篇：常见的接口地址
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
