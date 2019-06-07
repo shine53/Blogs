@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://shine53.github.io/favicon.ico?v=1559924625421">
+<link rel="shortcut icon" href="https://shine53.github.io/favicon.ico?v=1559924996231">
 <link rel="stylesheet" href="https://shine53.github.io/styles/main.css">
 
 
@@ -29,7 +29,7 @@
   <div class="site-header">
     <div class="left">
       <a href="https://shine53.github.io">
-        <img class="avatar" src="https://shine53.github.io/images/avatar.png?v=1559924625421" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://shine53.github.io/images/avatar.png?v=1559924996231" alt="" width="32px" height="32px">
       </a>
       <a href="https://shine53.github.io">
         <h1 class="site-title">Gridea</h1>
@@ -90,40 +90,40 @@
 <ol>
 <li>html</li>
 </ol>
-<pre><code class="language-html">			&lt;div id=&quot;p&quot; class=&quot;easyui-panel&quot; title=&quot;My Panel&quot; style=&quot;width:500px;height:150px;padding:10px;background:#fafafa;&quot; data-options=&quot;iconCls:'icon-save',closable:true, collapsible:true,minimizable:true,maximizable:true&quot;&gt;
-				&lt;p&gt;panel content.&lt;/p&gt;
-				&lt;p&gt;panel content.&lt;/p&gt;
-			&lt;/div&gt;
+<pre><code class="language-html">&lt;div id=&quot;p&quot; class=&quot;easyui-panel&quot; title=&quot;My Panel&quot; style=&quot;width:500px;height:150px;padding:10px;background:#fafafa;&quot; data-options=&quot;iconCls:'icon-save',closable:true, collapsible:true,minimizable:true,maximizable:true&quot;&gt;
+		&lt;p&gt;panel content.&lt;/p&gt;
+		&lt;p&gt;panel content.&lt;/p&gt;
+&lt;/div&gt;
 </code></pre>
-<p>常用属性：
-1. href: 请求同源页面，只能请求到 body 中的内容（如果 script 写在 head 中，求取不到），如果数据求取不到，会有一个 loading 动画，知道数据加载成功；
-2. padding：只对 panel-body 起作用；
-3. closable: 显示关闭按钮；
-4. miniminzable: 显示缩小按钮，跟 closable 的效果一样，都是隐藏起来，可以在角落写一个小方块，点击时让 panel 再次显示即可；
-5. maximizable: 显示最大化按钮，如果设置了 fit: true, 则不起作用；
-6. tools：自定义工具组
-面板（panel）工具组可通过已存在 <div> 标签声明
+<p><em>常用属性：</em>
+1. href: 请求同源页面，只能请求到 body 中的内容（如果 script 写在 head 中，求取不到），如果数据求取不到，会有一个 loading 动画，知道数据加载成功；<br>
+3. padding：只对 panel-body 起作用；<br>
+4. closable: 显示关闭按钮；<br>
+5. miniminzable: 显示缩小按钮，跟 closable 的效果一样，都是隐藏起来，可以在角落写一个小方块，点击时让 panel 再次显示即可；<br>
+6. maximizable: 显示最大化按钮，如果设置了 fit: true, 则不起作用；<br>
+7. tools：自定义工具组<br>
+面板（panel）工具组可通过已存在 <div> 标签声明</p>
+<pre><code class="language-html">&lt;div class=&quot;easyui-panel&quot; style=&quot;width:300px;height:200px&quot; title=&quot;My Panel&quot; data-options=&quot;iconCls:'icon-ok',tools:'#tt'&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;tt&quot;&gt;
+			&lt;a href=&quot;#&quot; class=&quot;icon-add&quot; onclick=&quot;javascript:alert('add')&quot;&gt;&lt;/a&gt;
+			&lt;a href=&quot;#&quot; class=&quot;icon-edit&quot; onclick=&quot;javascript:alert('edit')&quot;&gt;&lt;/a&gt;
+&lt;/div&gt;
+
+	&lt;!--	这种添加方式，#tt 只能被调用一次 --&gt;
+	```  
+					面板（panel）工具组可通过数组定义  
 ```html
-<div class="easyui-panel" style="width:300px;height:200px" title="My Panel" data-options="iconCls:'icon-ok',tools:'#tt'"></div>
-<div id="tt">
-<a href="#" class="icon-add" onclick="javascript:alert('add')"></a>
-<a href="#" class="icon-edit" onclick="javascript:alert('edit')"></a>
-</div></p>
-<pre><code>					&lt;!--	这种添加方式，#tt 只能被调用一次 --&gt;
-				```
-				面板（panel）工具组可通过数组定义
-			```html
-					&lt;div class=&quot;easyui-panel&quot; style=&quot;width:300px;height:200px&quot; title=&quot;My Panel&quot; data-options=&quot;iconCls:'icon-ok',tools:[
-						{
-							iconCls:'icon-add',
-							handler:function(){alert('add')}
-						},{
-							iconCls:'icon-edit',
-							handler:function(){alert('edit')}
-						}]&quot;&gt;
-				&lt;/div&gt;
-			```
-这里有事件，不能写在 data 外面</code></pre>
+&lt;div class=&quot;easyui-panel&quot; style=&quot;width:300px;height:200px&quot; title=&quot;My Panel&quot; data-options=&quot;iconCls:'icon-ok',tools:[
+	{
+		iconCls:'icon-add',
+		handler:function(){alert('add')}
+	},{
+		iconCls:'icon-edit',
+		handler:function(){alert('edit')}
+	}]&quot;&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code>这里有事件，不能写在 data 外面</code></pre>
 
           </div>
         </div>
