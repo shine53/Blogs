@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>关于 | Gridea</title>
+<title>easyui--panel | Gridea</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -79,18 +79,64 @@
       <div class="content-container">
         <div class="post-detail">
           
-          <h2 class="post-title">关于</h2>
+          <h2 class="post-title">easyui--panel</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-01-25</span>
+            <span><i class="icon-calendar-outline"></i> 2019-06-07</span>
             
           </div>
           <div class="post-content">
-            <p>这是关于的页面，可以在这里向世界介绍你！</p>
+            <p><em>其实写下来的这些东西文档中都有相关内容，在写一遍是为了更好的备注</em></p>
+<h1 id="panel-的创建">panel 的创建</h1>
+<ol>
+<li>html</li>
+</ol>
+<pre><code class="language-html">			&lt;div id=&quot;p&quot; class=&quot;easyui-panel&quot; title=&quot;My Panel&quot; style=&quot;width:500px;height:150px;padding:10px;background:#fafafa;&quot; data-options=&quot;iconCls:'icon-save',closable:true, collapsible:true,minimizable:true,maximizable:true&quot;&gt;
+				&lt;p&gt;panel content.&lt;/p&gt;
+				&lt;p&gt;panel content.&lt;/p&gt;
+			&lt;/div&gt;
+</code></pre>
+<p>常用属性：
+1. href: 请求同源页面，只能请求到 body 中的内容（如果 script 写在 head 中，求取不到），如果数据求取不到，会有一个 loading 动画，知道数据加载成功；
+2. padding：只对 panel-body 起作用；
+3. closable: 显示关闭按钮；
+4. miniminzable: 显示缩小按钮，跟 closable 的效果一样，都是隐藏起来，可以在角落写一个小方块，点击时让 panel 再次显示即可；
+5. maximizable: 显示最大化按钮，如果设置了 fit: true, 则不起作用；
+6. tools：自定义工具组
+面板（panel）工具组可通过已存在 <div> 标签声明
+```html
+<div class="easyui-panel" style="width:300px;height:200px" title="My Panel" data-options="iconCls:'icon-ok',tools:'#tt'"></div>
+<div id="tt">
+<a href="#" class="icon-add" onclick="javascript:alert('add')"></a>
+<a href="#" class="icon-edit" onclick="javascript:alert('edit')"></a>
+</div></p>
+<pre><code>					&lt;!--	这种添加方式，#tt 只能被调用一次 --&gt;
+				```
+				面板（panel）工具组可通过数组定义
+			```html
+					&lt;div class=&quot;easyui-panel&quot; style=&quot;width:300px;height:200px&quot; title=&quot;My Panel&quot; data-options=&quot;iconCls:'icon-ok',tools:[
+						{
+							iconCls:'icon-add',
+							handler:function(){alert('add')}
+						},{
+							iconCls:'icon-edit',
+							handler:function(){alert('edit')}
+						}]&quot;&gt;
+				&lt;/div&gt;
+			```
+这里有事件，不能写在 data 外面</code></pre>
 
           </div>
         </div>
 
         
+          <div class="next-post">
+            <a class="purple-link" href="https://shine53.github.io/post/easyui-guan-yu-yuan-ma-xiang-guan">
+              <h3 class="post-title">
+                下一篇：easyui--关于源码相关
+              </h3>
+            </a>
+          </div>
+          
       </div>
 
       
