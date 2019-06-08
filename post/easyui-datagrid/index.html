@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>关于 | Gridea</title>
+<title>easyui--datagrid | Gridea</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -79,18 +79,65 @@
       <div class="content-container">
         <div class="post-detail">
           
-          <h2 class="post-title">关于</h2>
+          <h2 class="post-title">easyui--datagrid</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2019-01-25</span>
+            <span><i class="icon-calendar-outline"></i> 2019-06-08</span>
             
           </div>
           <div class="post-content">
-            <p>这是关于的页面，可以在这里向世界介绍你！</p>
+            <h1 id="基本结构">基本结构</h1>
+<pre><code class="language-html">&lt;table class=&quot;baseData easyui-datagrid&quot; title=&quot;Basic DataGrid&quot; style=&quot;width:700px;height:250px&quot;
+			data-options=&quot;singleSelect:true,collapsible:true,url:'src/data/data1.json',method:'get',pagination:'true',rownumbers:'true',toolbar: '#tb',singleSelect:'true'&quot;&gt;
+	&lt;thead&gt;
+		&lt;tr&gt;
+				&lt;th data-options=&quot;field:'itemid',width:80&quot;&gt;Item ID&lt;/th&gt;
+				&lt;th data-options=&quot;field:'productid',width:100&quot;&gt;Product&lt;/th&gt;
+				&lt;th data-options=&quot;field:'listprice',width:80,align:'right',formatter:selFormat&quot;&gt;List Price&lt;/th&gt;
+				&lt;th data-options=&quot;field:'unitcost',width:80,align:'right'&quot;&gt;Unit Cost&lt;/th&gt;
+				&lt;th data-options=&quot;field:'attr1',width:250&quot;&gt;Attribute&lt;/th&gt;
+				&lt;th data-options=&quot;field:'status',width:60,align:'center'&quot;&gt;Status&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+&lt;/table&gt;
+&lt;div id=&quot;tb&quot;&gt;
+	&lt;a href=&quot;#&quot; class=&quot;easyui-linkbutton&quot; data-options=&quot;iconCls:'icon-cancel',plain:true&quot; onclick=&quot;del()&quot;&gt;删除&lt;/a&gt;
+	&lt;a href=&quot;#&quot; class=&quot;easyui-linkbutton&quot; data-options=&quot;iconCls:'icon-help',plain:true&quot;&gt;&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+<h1 id="常用属性">常用属性</h1>
+<ol>
+<li>rownumbers 是否显示行号；</li>
+<li>url 数据链接，返回的必须是 json 格式数据中的 rows 数组，且 field 的值要和 json 文件中的数据一一对应;</li>
+<li>formatter 单元格的格式化函数,需要三个参数; value：字段的值, rowData：行的记录数据, rowIndex：行的索引;</li>
+</ol>
+<pre><code class="language-js">function imgFormat(url) {
+	return '&lt;img alt=&quot;没有图片&quot; src=&quot;'+url+'&quot;/&gt;'
+}
+function selFormat(price) {
+	if(Number(price)&lt; 30) {
+		return '&lt;span style=&quot;color:red;&quot;&gt;'+price+'&lt;/span&gt;'
+	}
+	return price;
+}
+</code></pre>
+<h1 id="常用方法">常用方法</h1>
+<ol>
+<li>getSelected 返回第一个选中行的数据；</li>
+<li>reload 刷新时保持在当前页；</li>
+</ol>
 
           </div>
         </div>
 
         
+          <div class="next-post">
+            <a class="purple-link" href="https://shine53.github.io/post/easyui-panel">
+              <h3 class="post-title">
+                下一篇：easyui--panel
+              </h3>
+            </a>
+          </div>
+          
       </div>
 
       
